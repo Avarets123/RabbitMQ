@@ -6,3 +6,17 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+  mongo:
+    image: mongo:4.4.4
+    container_name: mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
