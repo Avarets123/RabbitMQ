@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rabbit-mq/contracts": ["libs/contracts/src/index.ts"],
       "@rabbit-mq/interfaces": ["libs/interfaces/src/index.ts"]
     }
   },

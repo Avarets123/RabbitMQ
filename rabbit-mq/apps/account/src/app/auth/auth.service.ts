@@ -2,8 +2,8 @@ import {  HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserRole } from '@rabbit-mq/interfaces';
 import { UserEntity } from '../user/entities/user.entity';
 import { UserRepository } from '../user/repositories/user.repository';
-import { RegisterDto } from './auth.controller';
 import {JwtService} from '@nestjs/jwt'
+import { AccountLogin, AccountRegister } from '@rabbit-mq/contracts';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
         ) {}
 
 
-    async register({email, password, displayName}: RegisterDto): Promise<{email: string}> {
+    async register({email, password, displayName}: AccountRegister.Request): Promise<AccountRegister.Response> {
 
         const oldUser = await this.userRepository.findUser(email);
 
@@ -54,7 +54,7 @@ export class AuthService {
 
     }
 
-    async login(id: string): Promise<{access_token: string}> {
+    async login(id: string): Promise<AccountLogin.Response> {
         return {
             access_token: await this.jwtService.signAsync({ id })
         }
